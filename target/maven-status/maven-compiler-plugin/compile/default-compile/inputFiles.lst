@@ -1,0 +1,5 @@
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/security/JwtTokenUtil.java
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/resource/AuthResource.java
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/config/JwtApplicationConfig.java
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/listener/JerseyInitializer.java
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/security/JwtAuthenticationFilter.java
