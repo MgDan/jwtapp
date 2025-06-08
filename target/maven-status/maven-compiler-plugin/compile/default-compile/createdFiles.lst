@@ -1,8 +1,0 @@
-org/dandroid/jwtapp/resource/AuthResource.class
-org/dandroid/jwtapp/config/JwtApplicationConfig.class
-org/dandroid/jwtapp/security/JwtTokenUtil.class
-org/dandroid/jwtapp/resource/AuthResource$TokenResponse.class
-org/dandroid/jwtapp/config/JwtApplicationConfig$1.class
-org/dandroid/jwtapp/listener/JerseyInitializer.class
-org/dandroid/jwtapp/resource/AuthResource$LoginRequest.class
-org/dandroid/jwtapp/security/JwtAuthenticationFilter.class
