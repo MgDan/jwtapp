@@ -1,4 +1,5 @@
 /Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/security/JwtTokenUtil.java
+/Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/persistence/models/Product.java
 /Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/resource/AuthResource.java
 /Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/persistence/ProductRepository.java
 /Users/danielvazquezescobedo/Documents/jwtapp/src/main/java/org/dandroid/jwtapp/config/JwtApplicationConfig.java
