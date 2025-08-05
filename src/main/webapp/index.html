@@ -62,7 +62,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const response = await fetch('http://localhost:8080/jwtApp/api/auth/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin' : '*',
             },
             body: JSON.stringify({ username, password })
         });

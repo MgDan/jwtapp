@@ -1,6 +1,7 @@
 package org.dandroid.jwtapp.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -16,16 +17,17 @@ import java.util.Map;
 @Named
 @ApplicationScoped
 public class JwtTokenUtil {
-    private Key securityKey; //token?
+    private static Key securityKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); //token?
     private long validityInMilliseconds = 3600000; // 1 hora
 
-    @PostConstruct
-    public void init(){
-        this.securityKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
+   // @PostConstruct
+   // public void init(){this.securityKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);}
 
-    public String generateToken(String username){
+    public String generateToken(String username, String password) {
+
+        // payload, signature, header
         Map<String, Object> claims = new HashMap<>();
+        claims.put("password", password);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
@@ -35,7 +37,7 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public boolean validateToken(String token){
+    public static boolean validateToken(String token){
         try {
             Jwts.parserBuilder().setSigningKey(securityKey).build().parseClaimsJws(token);
             return  true;
@@ -44,12 +46,22 @@ public class JwtTokenUtil {
         }
     }
 
-    public String getUsernameFromToken(String token){
+    public static String getUsernameFromToken(String token){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(securityKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+
         return claims.getSubject();
+    }
+
+    public static String getPasswordFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(securityKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("password", String.class);
     }
 }

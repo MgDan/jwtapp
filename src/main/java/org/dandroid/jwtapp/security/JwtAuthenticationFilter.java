@@ -22,26 +22,32 @@ public class JwtAuthenticationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        if(requestContext.getUriInfo().getPath().contains("login")){
-            return;
-        } //si es el login sale del filtro
 
-        // Si no tiene el header de autorizacion, aborta
+        String path = requestContext.getUriInfo().getPath();
+
+        if(path.contains("login") || path.contains("check")){return;}
+
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
-        if(authorizationHeader == null || !authorizationHeader.startsWith(AUTHENTICATION_SCHEME)){
-            abortWithUnauthorized(requestContext);
-        } // Si no tiene el header de autorizacion, aborta
+        // Si no tiene el header de autorizacion, aborta
+        if (authorizationHeader == null || !authorizationHeader.startsWith(AUTHENTICATION_SCHEME)) {abortWithUnauthorized(requestContext);return;}
 
+
+        // Extrae el token del header de autorizacion
         String token = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
 
+
         try {
-            if(!jwtTokenUtil.validateToken(token) ){
-                abortWithUnauthorized(requestContext);
-            }
-        }catch (Exception e){
+            String username = JwtTokenUtil.getUsernameFromToken(token);
+            System.out.println("Username from token: " + username);
+            String password = JwtTokenUtil.getPasswordFromToken(token);
+            System.out.println("Password from token: " + password);
+            if (username == null || !JwtTokenUtil.validateToken(token)) {abortWithUnauthorized(requestContext);}
+        } catch (Exception e) {
             abortWithUnauthorized(requestContext);
         }
+
+
     }
 
     private  void abortWithUnauthorized(ContainerRequestContext requestContext){

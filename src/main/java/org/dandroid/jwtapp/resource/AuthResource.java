@@ -1,10 +1,7 @@
 package org.dandroid.jwtapp.resource;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.dandroid.jwtapp.security.JwtTokenUtil;
@@ -20,8 +17,24 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login (LoginRequest loginRequest){
         if("admin".equals(loginRequest.getUsername()) && "password".equals(loginRequest.getPassword())){
-            String token = jwtTokenUtil.generateToken(loginRequest.getUsername());
+
+            String token;
+            try {
+                // Simulamos una validación de usuario
+                // Aquí podrías llamar a un servicio de autenticación real
+                // o verificar contra una base de datos.
+                token = jwtTokenUtil.generateToken(loginRequest.getUsername(),loginRequest.getPassword());
+                System.out.println("Token generado: " + token);
+
+
+            } catch (Exception e) {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity("Error al procesar la solicitud")
+                        .build();
+            }
+
             return Response.ok(new TokenResponse(token)).build();
+
         }else{
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity("Credenciales invalidas")

@@ -25,16 +25,22 @@
             <version>9.1.0</version>
             <scope>provided</scope>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -112,13 +118,13 @@
                     <container>
                         <containerId>tomcat10x</containerId>
                         <type>installed</type>
-                        <home>/Users/danielvazquezescobedo/tomcat</home>
+                        <home>C:/apache tomcat 11</home>
                     </container>
                     <configuration>
                         <type>standalone</type>
                         <home>${project.build.directory}/cargo/config</home>
                         <properties>
-                            <cargo.servlet.port>8080</cargo.servlet.port>
+                            <cargo.servlet.port>8081</cargo.servlet.port>
                             <cargo.tomcat.ajp.port>8009</cargo.tomcat.ajp.port>
                             <cargo.logging>high</cargo.logging>
                         </properties>
@@ -160,7 +166,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.3.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
