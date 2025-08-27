@@ -5,41 +5,59 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.dandroid.jwtapp.security.JwtTokenUtil;
+import org.dandroid.jwtapp.service.AuthService;
+import org.dandroid.jwtapp.vo.LoginRequestVO;
+import org.dandroid.jwtapp.vo.TokenResponseVO;
 
 @Path("/auth")
 public class AuthResource {
+
     @Inject
     private JwtTokenUtil jwtTokenUtil;
+
+
+
+    AuthResource(JwtTokenUtil jwtTokenUtil){
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
+
+    @Inject
+    private AuthService authService;
+
 
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login (LoginRequest loginRequest){
-        if("admin".equals(loginRequest.getUsername()) && "password".equals(loginRequest.getPassword())){
+    public Response login (LoginRequestVO loginRequest){
 
-            String token;
-            try {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+
+        System.out.println("sent username: "+username);
+        System.out.println("sent password: "+password);
+
+        if(!authService.validateUser(username, password)){
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Credenciales invalidas")
+                    .build();
+        }
+
+        String token;
+        try {
                 // Simulamos una validación de usuario
                 // Aquí podrías llamar a un servicio de autenticación real
                 // o verificar contra una base de datos.
-                token = jwtTokenUtil.generateToken(loginRequest.getUsername(),loginRequest.getPassword());
+                token = jwtTokenUtil.generateToken(username,password);
                 System.out.println("Token generado: " + token);
-
-
             } catch (Exception e) {
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                         .entity("Error al procesar la solicitud")
                         .build();
             }
 
-            return Response.ok(new TokenResponse(token)).build();
+            return Response.ok(new TokenResponseVO(token)).build();
 
-        }else{
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Credenciales invalidas")
-                    .build();
-        }
     }
 
     public static class LoginRequest{
@@ -77,5 +95,6 @@ public class AuthResource {
         public void setToken(String token) {
             this.token = token;
         }
-    }
+        }
+
 }

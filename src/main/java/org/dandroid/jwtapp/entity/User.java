@@ -15,6 +15,16 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    public User(){// Default constructor for JPA
+    }
+
+    public User(Long id, String username, String password) {
+        // Default constructor for JPA
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

@@ -16,7 +16,7 @@
         <tomcat.version>10.1</tomcat.version>
         <!-- Usamos Jakarta EE 9.1 que es compatible con Java 11+ -->
         <jersey.version>3.1.1</jersey.version>
-        <hibernate.version>5.6.15.Final</hibernate.version> <!-- Versión compatible con Java 15 -->
+
     </properties>
     <dependencies>
         <dependency>

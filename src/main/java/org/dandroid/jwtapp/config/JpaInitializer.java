@@ -10,7 +10,8 @@ public class JpaInitializer {
         try {
             emf = Persistence.createEntityManagerFactory("jwtappPU");
             // Optionally, create and close an EntityManager to trigger schema creation
-            emf.createEntityManager().close();
+           // emf.createEntityManager().close();
+            System.out.println("JPA EntityManagerFactory initialized successfully.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -18,6 +19,10 @@ public class JpaInitializer {
 
     public static void init() {
         // This method can be called to ensure static block runs
+    }
+
+    public static EntityManagerFactory getEntityManagerFactory() {
+        return emf;
     }
 
     public static void close() {

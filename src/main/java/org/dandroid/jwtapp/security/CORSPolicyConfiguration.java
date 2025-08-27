@@ -19,6 +19,7 @@ public class CORSPolicyConfiguration  implements Filter {
     public static final String CORS_HEADERS = "Access-Control-Allow-Headers";
     public static final String CORS_MAX_AGE = "Access-Control-Max-Age";
 
+    //http://localhost:5051
     public static final String ALLOWED_ORIGINS = "http://localhost:5051";
     public static final String ALLOWED_METHODS = "GET, POST, PUT, DELETE, OPTIONS";
     public static final String ALLOWED_HEADERS = "Content-Type, Authorization";
@@ -27,6 +28,7 @@ public class CORSPolicyConfiguration  implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws java.io.IOException, jakarta.servlet.ServletException {
+
 
         // Verifica que la solicitud y respuesta sean del tipo HttpServletRequest y HttpServletResponse
         HttpServletRequest httpRequest = (HttpServletRequest) request;

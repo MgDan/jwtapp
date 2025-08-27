@@ -11,7 +11,7 @@
             <property name="jakarta.persistence.jdbc.user" value="jwtApp"/>
             <property name="jakarta.persistence.jdbc.password" value="jwtApp"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

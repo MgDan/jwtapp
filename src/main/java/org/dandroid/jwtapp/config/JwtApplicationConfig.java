@@ -48,7 +48,9 @@ public class JwtApplicationConfig extends ResourceConfig {
         register(RolesAllowedDynamicFeature.class);
         // register(JerseyInitializer.class);
         register(JwtAuthenticationFilter.class);
-        register(configurationBinder);
+     //   register(configurationBinder);
+
+        JpaInitializer.init();
 
         /*
         register(new AbstractBinder() {
